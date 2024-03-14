@@ -1,15 +1,15 @@
-### Use Debian Buster for a recent `nmcli` version
+### Use ubuntu jammy for a recent `nmcli` version
 ###
-FROM resin/%%RESIN_MACHINE_NAME%%-debian:buster-20180820
+FROM ubuntu:jammy
 
 ### D-Bus calls needs to be directed to the system bus that the host OS is listening on
 ###
-ENV DBUS_SYSTEM_BUS_ADDRESS unix:path=/host/run/dbus/system_bus_socket
+ENV DBUS_SYSTEM_BUS_ADDRESS unix:path=/var/run/dbus/system_bus_socket
 
 ### Install `nmcli` dependencies
 ###
 RUN apt-get update \
-    && apt-get install -y libnm0 libpolkit-agent-1-0
+    && apt-get install -y libnm0 libpolkit-agent-1-0 libreadline8
 
 ### `nmcli` will be available in the `/usr/src/app` folder
 ###
